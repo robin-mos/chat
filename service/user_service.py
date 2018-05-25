@@ -51,10 +51,11 @@ class UserService:
         else:
             return None
 
-
-    def update_user_password(self, db_session,userid, new_password, old_password):
+    @staticmethod
+    def update_user_password(db_session,userid, new_password, old_password):
         count = db_session.query(User).filter(User.userid == userid, User.password == old_password)\
             .update({'password': new_password})
+        return count
 
     @staticmethod
     def save_user(db_session, user, userid):
